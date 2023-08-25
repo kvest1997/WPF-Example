@@ -14,7 +14,7 @@ namespace WPF_Example.ViewModels.Base
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
-        /// Вызов события на изменения поля
+        /// Генерация события на изменения свойства
         /// </summary>
         /// <param name="PropertyName"></param>
         protected virtual void OnPropertyChanged([CallerMemberName]string PropertyName = null)
@@ -28,7 +28,7 @@ namespace WPF_Example.ViewModels.Base
         /// <typeparam name="T"></typeparam>
         /// <param name="field">Поле\свойство</param>
         /// <param name="value">значение</param>
-        /// <param name="PropertyName">название метода</param>
+        /// <param name="PropertyName">название свойства</param>
         /// <returns></returns>
         protected virtual bool Set<T>(ref T field, T value, [CallerMemberName] string PropertyName = null)
         {
@@ -41,6 +41,19 @@ namespace WPF_Example.ViewModels.Base
         public void Dispose()
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispodse()
+        {
+            Dispose(true);
+        }
+
+        private bool _Disposed;
+        protected virtual void Dispose(bool Disposing)
+        {
+            if (!Disposing || _Disposed) return;
+            _Disposed = true;
+            // Освобождение управляемых ресурсов
         }
     }
 }
