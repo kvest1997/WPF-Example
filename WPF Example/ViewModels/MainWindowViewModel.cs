@@ -1,4 +1,7 @@
-﻿using WPF_Example.ViewModels.Base;
+﻿using System.Windows;
+using System.Windows.Input;
+using WPF_Example.Infrastructure.Commands;
+using WPF_Example.ViewModels.Base;
 
 namespace WPF_Example.ViewModels
 {
@@ -29,5 +32,36 @@ namespace WPF_Example.ViewModels
         }
 
         #endregion
+
+        #region Commands
+
+        #region CloseApplicationCommand
+        /// <summary>
+        /// Комманда
+        /// </summary>
+        public ICommand CloseApplicationCommand { get; }
+        private bool CanCloseApplicationCommandExecute(object p) => true;
+
+        /// <summary>
+        /// Метод выполняющийся в момент выполнения комманды
+        /// </summary>
+        /// <param name="p"></param>
+        private void OnCloseApplicationCommandExecuted(object p)
+        {
+            Application.Current.Shutdown();
+        }
+        #endregion
+
+        #endregion
+
+        public MainWindowViewModel()
+        {
+            #region Commands
+
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, 
+                CanCloseApplicationCommandExecute);
+
+            #endregion
+        }
     }
 }
