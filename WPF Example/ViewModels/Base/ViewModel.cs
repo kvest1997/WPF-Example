@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace WPF_Example.ViewModels.Base
 {
@@ -39,11 +37,6 @@ namespace WPF_Example.ViewModels.Base
         }
 
         public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Dispodse()
         {
             Dispose(true);
         }
