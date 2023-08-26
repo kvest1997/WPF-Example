@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" mc:Ignorable="d"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cmd="clr-namespace:WPF_Example.Infrastructure.Commands"
         xmlns:vm="clr-namespace:WPF_Example.ViewModels"
         xmlns:l="clr-namespace:WPF_Example"
         Title="{Binding Path=Title}" Height="450" Width="800">
@@ -12,7 +13,13 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
-                <MenuItem Header="Выход" Command="{Binding CloseApplicationCommand}"/>
+                <!--<MenuItem Header="Выход" 
+                          Command="{Binding Path=CloseApplicationCommand}"/>-->
+                <MenuItem Header="Выход">
+                    <MenuItem.Command>
+                        <cmd:CloseApplicationCommand/>
+                    </MenuItem.Command>
+                </MenuItem>
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"/>
@@ -46,7 +53,7 @@
                                Stroke="Red" 
                                StrokeThickness="3" 
                                RadiusX="5" RadiusY="7"
-                               Margin="50 70"/>
+                               Margin="20 10"/>
 
                     <Ellipse Grid.Column="1" Grid.Row="0"
                              Fill="Red" Stroke="Blue" StrokeThickness="3"/>

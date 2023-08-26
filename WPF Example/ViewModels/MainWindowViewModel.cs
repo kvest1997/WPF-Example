@@ -49,16 +49,16 @@ namespace WPF_Example.ViewModels
         private void OnCloseApplicationCommandExecuted(object p)
         {
             Application.Current.Shutdown();
-        }
-        #endregion
+            }
+            #endregion
 
-        #endregion
+            #endregion
 
-        public MainWindowViewModel()
+            public MainWindowViewModel()
         {
             #region Commands
 
-            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted, 
+            CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted,
                 CanCloseApplicationCommandExecute);
 
             #endregion
