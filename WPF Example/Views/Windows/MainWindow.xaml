@@ -7,19 +7,29 @@
         xmlns:vm="clr-namespace:WPF_Example.ViewModels"
         xmlns:l="clr-namespace:WPF_Example"
         Title="{Binding Path=Title}" Height="450" Width="800">
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Ctrl" Key="Q" Command="{Binding CloseApplicationCommand}"/>
+    </Window.InputBindings>
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
+    <Window.Resources>
+        <cmd:CloseApplicationCommand x:Key="CloseApplicationCommand"/>
+    </Window.Resources>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="Файл">
                 <!--<MenuItem Header="Выход" 
                           Command="{Binding Path=CloseApplicationCommand}"/>-->
-                <MenuItem Header="Выход">
+                
+                <!--<MenuItem Header="Выход">
                     <MenuItem.Command>
                         <cmd:CloseApplicationCommand/>
                     </MenuItem.Command>
-                </MenuItem>
+                </MenuItem>-->   
+                
+                <MenuItem Header="Выход" Command="{StaticResource CloseApplicationCommand}"/>
+
             </MenuItem>
             <MenuItem Header="Помощь">
                 <MenuItem Header="О программе"/>
@@ -56,7 +66,13 @@
                                Margin="20 10"/>
 
                     <Ellipse Grid.Column="1" Grid.Row="0"
-                             Fill="Red" Stroke="Blue" StrokeThickness="3"/>
+                             Fill="Red" Stroke="Blue" StrokeThickness="3"
+                             >
+                        <Ellipse.InputBindings>
+                            <MouseBinding Command="{Binding CloseApplicationCommand}"
+                                          MouseAction="LeftDoubleClick"/>
+                        </Ellipse.InputBindings>
+                    </Ellipse>
                 </Grid>
             </TabItem>
             <TabItem Header="Вкладка 2">

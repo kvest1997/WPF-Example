@@ -33,6 +33,7 @@ namespace WPF_Example.ViewModels
 
         #endregion
 
+        //Эфективнее чем создание класса, меньше тратится ресурсов
         #region Commands
 
         #region CloseApplicationCommand
@@ -54,7 +55,7 @@ namespace WPF_Example.ViewModels
 
             #endregion
 
-            public MainWindowViewModel()
+        public MainWindowViewModel()
         {
             #region Commands
 
