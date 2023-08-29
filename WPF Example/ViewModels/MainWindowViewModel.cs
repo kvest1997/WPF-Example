@@ -11,6 +11,17 @@ namespace WPF_Example.ViewModels
     internal class MainWindowViewModel : ViewModel
     {
         /// <summary>
+        /// Индекс страницы
+        /// </summary>
+        private int _SelectedPageIndex;
+
+        public int SelectedPageIndex
+        {
+            get => _SelectedPageIndex;
+            set => Set(ref _SelectedPageIndex, value);
+        }
+
+        /// <summary>
         /// Тестовый набор данных для визуализации графика
         /// </summary>
         private IEnumerable<DataPoint> _TestDataPoints;
@@ -46,6 +57,16 @@ namespace WPF_Example.ViewModels
         //Эфективнее чем создание класса, меньше тратится ресурсов
         #region Commands
 
+        public ICommand ChangeTabIndexCommand { get; }
+        private bool CanChangeTabIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
+        private void OnChangeTabIndexCommandExecuted(object p)
+        {
+            if (p is null) return;
+
+            SelectedPageIndex += Convert.ToInt32(p);
+        }
+
+
         #region CloseApplicationCommand
         /// <summary>
         /// Комманда
@@ -60,10 +81,10 @@ namespace WPF_Example.ViewModels
         private void OnCloseApplicationCommandExecuted(object p)
         {
             Application.Current.Shutdown();
-            }
-            #endregion
+        }
 
-            #endregion
+        #endregion
+        #endregion
 
         public MainWindowViewModel()
         {
@@ -71,6 +92,9 @@ namespace WPF_Example.ViewModels
 
             CloseApplicationCommand = new LambdaCommand(OnCloseApplicationCommandExecuted,
                 CanCloseApplicationCommandExecute);
+
+            ChangeTabIndexCommand = new LambdaCommand(OnChangeTabIndexCommandExecuted,
+                CanChangeTabIndexCommandExecute);
 
             #endregion
 
