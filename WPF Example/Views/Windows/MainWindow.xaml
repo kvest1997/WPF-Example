@@ -27,7 +27,7 @@
                 <!--<MenuItem Header="Выход" 
                           Command="{Binding Path=CloseApplicationCommand}"/>-->
                 
-                <!--<MenuItem Header="Выход">
+                <!--<MenuItem Header="Выход"> 
                     <MenuItem.Command>
                         <cmd:CloseApplicationCommand/>
                     </MenuItem.Command>
