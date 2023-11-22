@@ -9,14 +9,22 @@ using WPF_Example.Infrastructure.Commands;
 using WPF_Example.Models;
 using WPF_Example.Models.Decanat;
 using WPF_Example.ViewModels.Base;
+using Group = WPF_Example.Models.Decanat.Group;
 
 namespace WPF_Example.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        public ObservableCollection<Group> Groups { get; }
 
-        public ObservableCollection<Models.Decanat.Group> Groups { get; }
+        #region SelectedGroup : Group - Выбранная группа
 
+        private Group _SelectedGroup;
+        public Group SelectedGroupd { get => _SelectedGroup; set => Set(ref _SelectedGroup, value); }
+
+        #endregion
+
+        #region SelectedPageIndex : int - Номер выбранной вкладки
         /// <summary>
         /// Индекс страницы
         /// </summary>
@@ -27,13 +35,16 @@ namespace WPF_Example.ViewModels
             get => _SelectedPageIndex;
             set => Set(ref _SelectedPageIndex, value);
         }
+        #endregion
 
+        #region TestDataPoint : IEnumerable<DataPoint> - Тестовый набор данных для визуализации графиков
         /// <summary>
         /// Тестовый набор данных для визуализации графика
         /// </summary>
         private IEnumerable<DataPoint> _TestDataPoints;
 
         public IEnumerable<DataPoint> TestDataPoints { get => _TestDataPoints; set => Set(ref _TestDataPoints, value); }
+        #endregion
 
         #region Заголовок окна
         /// <summary>Заголовок окна</summary>
@@ -64,6 +75,7 @@ namespace WPF_Example.ViewModels
         //Эфективнее чем создание класса, меньше тратится ресурсов
         #region Commands
 
+        #region ChangeTabIndexCommand
         public ICommand ChangeTabIndexCommand { get; }
         private bool CanChangeTabIndexCommandExecute(object p) => _SelectedPageIndex >= 0;
         private void OnChangeTabIndexCommandExecuted(object p)
@@ -72,7 +84,7 @@ namespace WPF_Example.ViewModels
 
             SelectedPageIndex += Convert.ToInt32(p);
         }
-
+        #endregion
 
         #region CloseApplicationCommand
         /// <summary>
@@ -91,6 +103,7 @@ namespace WPF_Example.ViewModels
         }
 
         #endregion
+
         #endregion
 
         public MainWindowViewModel()
@@ -125,12 +138,12 @@ namespace WPF_Example.ViewModels
                 Rating = 0
             });
 
-            var groups = new ObservableCollection<Models.Decanat.Group>(Enumerable.Range(1, 20).Select(i => new Models.Decanat.Group
+            var groups = new ObservableCollection<Group>(Enumerable.Range(1, 20).Select(i => new Group
             {
                 Name = $"Группа {i}",
                 Students = new ObservableCollection<Student>(students)
             }));
-            Groups = new ObservableCollection<Models.Decanat.Group>(groups);
+            Groups = new ObservableCollection<Group>(groups);
 
         }
     }

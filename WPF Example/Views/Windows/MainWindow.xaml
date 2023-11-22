@@ -117,9 +117,15 @@
                     </Grid.ColumnDefinitions>
 
                     <GroupBox Grid.Column="0" Header="Группы">
-                        <ListBox ItemsSource="{Binding Groups}" DisplayMemberPath="Name"/>
+                        <ListBox ItemsSource="{Binding Groups}" 
+                                 DisplayMemberPath="Name"
+                                 SelectedItem="{Binding SelectedGroupd}"/>
                     </GroupBox>
-                    <GroupBox Grid.Column="1" Header="Студенты">
+                    <GroupBox Grid.Column="1" 
+                              Header="{Binding SelectedGroupd.Name, 
+                        StringFormat='Студенты группы {0}', 
+                        FallbackValue='Студенты', 
+                        TargetNullValue='Группа не выбрана'}">
                         <DataGrid>
                             
                         </DataGrid>
