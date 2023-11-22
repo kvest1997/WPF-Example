@@ -117,17 +117,27 @@
                     </Grid.ColumnDefinitions>
 
                     <GroupBox Grid.Column="0" Header="Группы">
-                        <ListBox ItemsSource="{Binding Groups}" 
+                        <ListBox ItemsSource="{Binding Groups}" SelectedIndex="0"
                                  DisplayMemberPath="Name"
-                                 SelectedItem="{Binding SelectedGroupd}"/>
+                                 SelectedItem="{Binding SelectedGroup}"/>
                     </GroupBox>
                     <GroupBox Grid.Column="1" 
-                              Header="{Binding SelectedGroupd.Name, 
+                              Header="{Binding SelectedGroup.Name, 
                         StringFormat='Студенты группы {0}', 
                         FallbackValue='Студенты', 
                         TargetNullValue='Группа не выбрана'}">
-                        <DataGrid>
-                            
+                        <DataGrid ItemsSource="{Binding SelectedGroup.Students}"
+                                  AutoGenerateColumns="False"
+                                  >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}"/>
+                                <DataGridTextColumn Header="Имя" Binding="{Binding Name}"/>
+                                <DataGridTextColumn Header="Отчество" Binding="{Binding Patronymic}"/>
+                                <DataGridTextColumn Header="Рейтинг" Binding="{Binding Rating}"/>
+                                <DataGridTextColumn Header="Дата Рождения" Binding="{Binding Birthday, StringFormat=dd.MM.yyyy}"/>
+                                <!--<DataGridTextColumn Header="Группа" Binding="{Binding DataContext.SelectedGroup.Name, 
+                                    RelativeSource={RelativeSource AncestorType=DataGrid}}"/>-->
+                            </DataGrid.Columns>
                         </DataGrid>
                     </GroupBox>
                 </Grid>

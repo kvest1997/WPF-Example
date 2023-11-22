@@ -20,7 +20,7 @@ namespace WPF_Example.ViewModels
         #region SelectedGroup : Group - Выбранная группа
 
         private Group _SelectedGroup;
-        public Group SelectedGroupd { get => _SelectedGroup; set => Set(ref _SelectedGroup, value); }
+        public Group SelectedGroup { get => _SelectedGroup; set => Set(ref _SelectedGroup, value); }
 
         #endregion
 
@@ -133,7 +133,7 @@ namespace WPF_Example.ViewModels
             {
                 Name = $"Name {student_index}",
                 Surname = $"Surname {student_index}",
-                Patronymic = $"Patronymic {student_index}",
+                Patronymic = $"Patronymic {student_index++}",
                 Birthday = DateTime.Now,
                 Rating = 0
             });
