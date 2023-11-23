@@ -135,7 +135,8 @@ namespace WPF_Example.ViewModels
                 Surname = $"Surname {student_index}",
                 Patronymic = $"Patronymic {student_index++}",
                 Birthday = DateTime.Now,
-                Rating = 0
+                Rating = 0,
+                Description = $"Описание - {student_index}"
             });
 
             var groups = new ObservableCollection<Group>(Enumerable.Range(1, 20).Select(i => new Group
