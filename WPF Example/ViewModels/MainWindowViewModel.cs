@@ -15,6 +15,10 @@ namespace WPF_Example.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
+        public object[] CompositeCollection { get; }
+        private object _SelectedCompositeValue;
+        public object SelectedCompositeValue { get => _SelectedCompositeValue; set => Set(ref _SelectedCompositeValue, value); }
+
         public ObservableCollection<Group> Groups { get; }
 
         #region SelectedGroup : Group - Выбранная группа
@@ -146,6 +150,16 @@ namespace WPF_Example.ViewModels
             }));
             Groups = new ObservableCollection<Group>(groups);
 
+
+            List<object> CompositList = new List<object>
+            {
+                "Привет мир!",
+                44,
+                Groups[1],
+                Groups[1].Students[0]
+            };
+
+            CompositeCollection = CompositList.ToArray();
         }
     }
 }

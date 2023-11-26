@@ -119,8 +119,17 @@
 
                     <GroupBox Grid.Column="0" Header="Группы">
                         <ListBox ItemsSource="{Binding Groups}" SelectedIndex="0"
-                                 DisplayMemberPath="Name"
-                                 SelectedItem="{Binding SelectedGroup}"/>
+                                 SelectedItem="{Binding SelectedGroup}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate DataType="decanat:Group">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Name}"/>
+                                        <TextBlock Text="{Binding Students.Count, StringFormat= [{0}]}" 
+                                                   Margin="3,0,0,0"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </GroupBox>
                     <GroupBox Grid.Column="1" 
                               Header="{Binding SelectedGroup.Name, 
@@ -133,8 +142,7 @@
                                   CanUserAddRows="False"
                                   GridLinesVisibility="Vertical"
                                   VerticalGridLinesBrush="DarkGray"
-                                  AlternatingRowBackground="LightGray"
-                            >
+                                  AlternatingRowBackground="LightGray">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Фамилия" Binding="{Binding Surname}" IsReadOnly="True"/>
                                 <DataGridTextColumn Header="Имя" Binding="{Binding Name}" IsReadOnly="True"/>
@@ -165,6 +173,42 @@
                                 <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Разные данные">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="250"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <GroupBox Header="Элементы">
+                        <GroupBox.Resources>
+                            <DataTemplate DataType="{x:Type decanat:Group}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                            
+                            <DataTemplate DataType="{x:Type decanat:Student}">
+                                <TextBlock Text="{Binding Name, StringFormat=Студент {0}}"/>
+                            </DataTemplate>
+                        </GroupBox.Resources>
+                        
+                        <ListBox ItemsSource="{Binding CompositeCollection}" 
+                             SelectedItem="{Binding SelectedCompositeValue}"/>
+                    </GroupBox>
+                    
+                    <GroupBox Header="Выбранный элемент" Grid.Column="1">
+                        <GroupBox.Resources>
+                            <DataTemplate DataType="{x:Type decanat:Group}">
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+
+                            <DataTemplate DataType="{x:Type decanat:Student}">
+                                <TextBlock Text="{Binding Name, StringFormat=Студент {0}}"/>
+                            </DataTemplate>
+                        </GroupBox.Resources>
+
+                        <ContentControl Content="{Binding SelectedCompositeValue}"/>
                     </GroupBox>
                 </Grid>
             </TabItem>
